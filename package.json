@@ -1,0 +1,64 @@
+{
+  "name": "push2react",
+  "version": "1.0.0",
+  "main": "dist/index.html",
+  "repository": "https://github.com/sadnessOjisan/push2react.git",
+  "author": "sadness_ojisan <sadness.ojisan@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
+    "@types/styled-components": "^4.1.15",
+    "@types/web-bluetooth": "^0.0.4",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.0.0",
+    "dotenv-webpack": "^1.7.0",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.13.0",
+    "file-loader": "^4.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^3.0.0",
+    "json-server": "^0.15.0",
+    "lint-staged": "^9.1.0",
+    "prettier": "^1.17.1",
+    "style-loader": "^0.23.1",
+    "typescript": "^3.5.1",
+    "url-loader": "^2.0.1",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.5.1"
+  },
+  "dependencies": {
+    "firebase": "^6.2.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "styled-components": "^4.2.1"
+  },
+  "scripts": {
+    "lint": "eslint --fix './src/**/*.{ts,tsx,json}'",
+    "format": "prettier --write './src/**/*.{ts,tsx,json,js}'",
+    "build:local": "BUILD_MODE='development' REACT_APP_ENV=local webpack",
+    "build:dev": "BUILD_MODE='development' REACT_APP_ENV=development webpack",
+    "build:stg": "BUILD_MODE='production' REACT_APP_ENV=staging webpack",
+    "build:prd": "BUILD_MODE='production' REACT_APP_ENV=production webpack",
+    "start:local": "sh ./script/predeploy.sh & BUILD_MODE='development' REACT_APP_ENV='local' webpack-dev-server",
+    "start:dev": "BUILD_MODE='development' REACT_APP_ENV=development webpack-dev-server",
+    "start:stg": "BUILD_MODE='production' REACT_APP_ENV='staging' webpack-dev-server",
+    "start:prd": "BUILD_MODE='production' REACT_APP_ENV='production' webpack-dev-server",
+    "precommit": "lint-staged",
+    "deploy:prd": "sh ./script/predeploy.sh & yarn run build:prd & firebase deploy"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,json,js}": [
+      "yarn run format",
+      "git add"
+    ]
+  }
+}
